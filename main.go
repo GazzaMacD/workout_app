@@ -28,15 +28,8 @@ func main() {
 
 	app.Logger.Printf("We are running on %d", port)
 
-	// Health check route
-	http.HandleFunc("/health", HealthCheck)
-
 	err = server.ListenAndServe()
 	if err != nil {
 		app.Logger.Fatal(err)
 	}
-}
-
-func HealthCheck(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Status is available\n")
 }
