@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/GazzaMacD/workout_app/internal/app"
+	"github.com/GazzaMacD/workout_app/internal/routes"
 	"net/http"
 	"time"
 )
@@ -19,8 +20,11 @@ func main() {
 		panic(err)
 	}
 
+	r := routes.SetupRoutes(app)
+
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
+		Handler:      r,
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
