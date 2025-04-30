@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/GazzaMacD/workout_app/internal/app"
 	"net/http"
 	"time"
@@ -20,8 +21,15 @@ func main() {
 		WriteTimeout: 30 * time.Second,
 	}
 
+	// Health check route
+	http.HandleFunc("/health", HealthCheck)
+
 	err = server.ListenAndServe()
 	if err != nil {
 		app.Logger.Fatal(err)
 	}
+}
+
+func HealthCheck(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Status is available\n")
 }
