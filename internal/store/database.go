@@ -9,6 +9,7 @@ import (
 func Open() (*sql.DB, error) {
 	db, err := sql.Open(
 		"pgx",
+		//FIX: Take out for production
 		"host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable",
 	)
 

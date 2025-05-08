@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/GazzaMacD/workout_app/internal/app"
-	"github.com/GazzaMacD/workout_app/internal/routes"
 	"net/http"
 	"time"
+
+	"github.com/GazzaMacD/workout_app/internal/app"
+	"github.com/GazzaMacD/workout_app/internal/routes"
 )
 
 func main() {
@@ -19,6 +20,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	// defer closing of DB connection
+	defer app.DB.Close()
 
 	r := routes.SetupRoutes(app)
 
